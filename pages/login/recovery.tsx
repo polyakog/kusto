@@ -19,7 +19,7 @@ const RecoveryPage = () => {
         console.log(JSON.stringify(data))
 
     if (data.users.length != 0) {
-      setIsModal(true)
+      setIsModal(true);
       setIsMessage(true)
     }
   };
