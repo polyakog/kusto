@@ -1,33 +1,34 @@
-import type {AppProps} from 'next/app';
-import {ReactElement, ReactNode, useState} from 'react';
-import {NextPage} from 'next';
-import {QueryClient} from '@tanstack/query-core';
-import {Hydrate, QueryClientProvider} from '@tanstack/react-query';
-import {useLoader} from 'assets/hooks/useLoader';
-import 'styles/nprogress.css'
-import 'styles/globals.css'
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import { passwordRecoveryApi } from 'assets/api/password_recovery_api';
-
+import type { AppProps } from "next/app";
+import { ReactElement, ReactNode, useState } from "react";
+import { NextPage } from "next";
+import { QueryClient } from "@tanstack/query-core";
+import { Hydrate, QueryClientProvider } from "@tanstack/react-query";
+import { useLoader } from "assets/hooks/useLoader";
+import "styles/nprogress.css";
+import "styles/globals.css";
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+import { passwordRecoveryApi } from "assets/api/password_recovery_api";
+import { store } from "assets/store/store";
+import { Provider } from "react-redux";
 
 export type NextPageWithLayout<P = {}> = NextPage<P> & {
-    getLayout?: (page: ReactElement) => ReactNode;
+  getLayout?: (page: ReactElement) => ReactNode;
 };
 
 type AppPropsWithLayout = AppProps & {
-    Component: NextPageWithLayout;
+  Component: NextPageWithLayout;
 };
 
-export default function App({Component, pageProps}: AppPropsWithLayout) {
-    // const [queryClient] = useState(() => new QueryClient)
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  // const [queryClient] = useState(() => new QueryClient)
 
-    useLoader()
+  useLoader();
 
-    const getLayout = Component.getLayout ?? ((page) => page);
+  const getLayout = Component.getLayout ?? ((page) => page);
 
-    return getLayout(
-        <ApiProvider api={passwordRecoveryApi}>
-            <Component {...pageProps} />
-        </ApiProvider>
-    );
+  return getLayout(
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }

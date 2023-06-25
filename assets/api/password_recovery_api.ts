@@ -8,7 +8,7 @@ export const passwordRecoveryApi: any = createApi({
         return {
         // 1 параметр - тип того, что возвращает сервер (ResultType)
         // 2 параметр - тип query аргументов (QueryArg)
-          getIsEmail: build.query<any, string>({
+          getIsEmail: build.mutation<any, string>({
             query: (email) => {
               return {
                 method: "GET",
@@ -23,4 +23,4 @@ export const passwordRecoveryApi: any = createApi({
       },
 })
 
-export const { useGetIsEmailQuery } = passwordRecoveryApi
+export const { useGetIsEmailMutation } = passwordRecoveryApi
