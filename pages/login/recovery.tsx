@@ -3,17 +3,23 @@ import { StyledWrap } from "components/Container";
 import { Input } from "components/Input/Input";
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
+import { useGetIsEmailQuery } from 'assets/api/password_recovery_api'
 
 const RecoveryPage = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("")
+  const [isMessage, setIsMessage] = useState(false)
+  const { data } = useGetIsEmailQuery(email)
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
   };
 
   const handleEmailSend = () => {
-    console.log('send: ', email)
+        console.log(JSON.stringify(data))
 
+    if (data.users.length != 0) {
+      setIsMessage(true)
+    }
   };
 
   return (
@@ -27,7 +33,10 @@ const RecoveryPage = () => {
           value={email}
           type='email'
         />
-        <Button onClick={handleEmailSend}>Send Link</Button>
+        { isMessage ? <><div>We have sent a link to confirm your email to {email}</div>
+                    <Button onClick={handleEmailSend}>Send Link Again</Button></>
+                    : <Button onClick={handleEmailSend}>Send Link</Button>
+        }
         <StyledButtonSecondary onClick = {() => null} variant="secondary">
           Back to Sign In
         </StyledButtonSecondary>
