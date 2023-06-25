@@ -7,6 +7,7 @@ import { useGetIsEmailQuery } from 'assets/api/password_recovery_api'
 
 const RecoveryPage = () => {
   const [email, setEmail] = useState("")
+  const [isModal, setIsModal] = useState(false)
   const [isMessage, setIsMessage] = useState(false)
   const { data } = useGetIsEmailQuery(email)
 
@@ -18,10 +19,20 @@ const RecoveryPage = () => {
         console.log(JSON.stringify(data))
 
     if (data.users.length != 0) {
+      setIsModal(true)
       setIsMessage(true)
     }
   };
 
+  const handleModalClose = () => {
+    setIsModal(false)
+  }
+
+  if (isModal) {
+    return <div>Email sent
+      <button onClick={handleModalClose}>Ok</button>
+    </div>
+  }
   return (
     <StyledPageConatiner>
       <StyledRecoveryPageContainer>
