@@ -25,7 +25,6 @@ export const StyledTitle = styled.h2`
   margin: 15px 0 8px;
 `;
 
-
 export const StyledSocialMediaWrapper = styled.div`
   display: flex;
   justify-content: center;
