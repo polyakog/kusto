@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Formik } from "formik";
-import showPasswordBtn from "../../public/icons/eye-outline.svg";
-import hidePasswordBtn from "../../public/icons/eye-off-outline.svg";
-import googleIcon from "../../public/icons/google-svgrepo-com.svg";
-import githubIcon from "../../public/icons/github-svgrepo-com.svg";
-import { SignupSchema } from "utils/registrationValidation";
+import React, { useState } from "react"
+import { Formik } from "formik"
+import showPasswordBtn from "../../public/icons/eye-outline.svg"
+import hidePasswordBtn from "../../public/icons/eye-off-outline.svg"
+import googleIcon from "../../public/icons/google-svgrepo-com.svg"
+import githubIcon from "../../public/icons/github-svgrepo-com.svg"
+import { SignupSchema } from "utils/registrationValidation"
 import {
   StyledBtn,
   StyledContainer,
@@ -17,31 +17,35 @@ import {
   StyledSocialMediaIcon,
   StyledSocialMediaWrapper,
   StyledText,
-  StyledTitle,
-} from "styles/styles";
-import {getLayout} from "../../components/Layout/BaseLayout/BaseLayout";
-import Home from "../index";
+  StyledTitle
+} from "styles/styles"
+import { getLayout } from "../../components/Layout/BaseLayout/BaseLayout"
+import Home from "../index"
 
+interface reqI {
+  login: string
+  password: string
+  email: string
+}
 
 export default function Registration() {
-  const [passwordType, setPasswordType] = useState("password");
-  const [passwordConfirmationType, setPasswordConfirmationType] =
-    useState("password");
+  const [passwordType, setPasswordType] = useState("password")
+  const [passwordConfirmationType, setPasswordConfirmationType] = useState("password")
 
   const showPasswordHandler = () => {
     if (passwordType === "text") {
-      setPasswordType("password");
+      setPasswordType("password")
     } else {
-      setPasswordType("text");
+      setPasswordType("text")
     }
-  };
+  }
   const showPasswordConfirmationHandler = () => {
     if (passwordConfirmationType === "text") {
-      setPasswordConfirmationType("password");
+      setPasswordConfirmationType("password")
     } else {
-      setPasswordConfirmationType("text");
+      setPasswordConfirmationType("text")
     }
-  };
+  }
 
   return (
     <StyledContainer>
@@ -55,25 +59,28 @@ export default function Registration() {
           username: "",
           password: "",
           passwordConfirmation: "",
-          email: "",
+          email: ""
         }}
         validationSchema={SignupSchema}
         onSubmit={async (values, { resetForm }) => {
-          console.log(values);
-          const data = {
+          console.log(values)
+          const data: reqI = {
             email: values.email,
             password: values.password,
-            username: values.username,
-          };
+            login: values.username
+          }
 
           try {
-            await fetch("https://jsonplaceholder.typicode.com/users", {
+            await fetch("https://calypso-one.vercel.app/auth/registration", {
               method: "POST",
               body: JSON.stringify(data),
-            }).then(() => console.log("otpravleno"));
-            resetForm();
+              headers: {
+                "Content-Type": "application/json"
+              }
+            }).then(() => console.log("otpravleno"))
+            resetForm()
           } catch {
-            console.log("err");
+            console.log("err")
           }
         }}
       >
@@ -94,11 +101,7 @@ export default function Registration() {
               <StyledField name="password" type={passwordType} />
               <StyledShowPasswordBtn
                 alt="show password"
-                src={
-                  passwordType === "password"
-                    ? showPasswordBtn
-                    : hidePasswordBtn
-                }
+                src={passwordType === "password" ? showPasswordBtn : hidePasswordBtn}
                 onClick={() => showPasswordHandler()}
               />
               {errors.password && touched.password ? (
@@ -109,17 +112,10 @@ export default function Registration() {
               Password confirmation
               <StyledShowPasswordBtn
                 alt="show password"
-                src={
-                  passwordConfirmationType === "password"
-                    ? showPasswordBtn
-                    : hidePasswordBtn
-                }
+                src={passwordConfirmationType === "password" ? showPasswordBtn : hidePasswordBtn}
                 onClick={() => showPasswordConfirmationHandler()}
               />
-              <StyledField
-                name="passwordConfirmation"
-                type={passwordConfirmationType}
-              />
+              <StyledField name="passwordConfirmation" type={passwordConfirmationType} />
               {errors.passwordConfirmation && touched.passwordConfirmation ? (
                 <StyledErrorMsg>{errors.passwordConfirmation}</StyledErrorMsg>
               ) : null}
@@ -140,7 +136,7 @@ export default function Registration() {
         <StyledSignIn href="/login">Sign in</StyledSignIn>
       </StyledSignInWrapper>
     </StyledContainer>
-  );
+  )
 }
 
 Registration.getLayout = getLayout
