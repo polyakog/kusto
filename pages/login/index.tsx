@@ -6,22 +6,24 @@ import google from '../../public/icons/google-svgrepo-com 1.svg'
 import github from '../../public/icons/github-svgrepo-com (3) 1.svg'
 import Image from "next/image";
 import {Button, ThemeButton} from "../../components/Button/ui/Button";
+import {Input} from "../../components/Input/Input";
 
 
 const Login = () => {
 
   return (
     // <StyledPageWrapper>
-    <StyledModal width={'378px'} height={'516px'} >
+    <StyledFormAuth width={'378px'} height={'516px'} >
       <Title>Sing In</Title>
+      <StyledIconBlock>
+        <Image width={36} height={36} src={google} alt={'Kusto'}/>
+        <Image  width={36} height={36} src={github} alt={'it'}/>
+      </StyledIconBlock>
+      <Input/>
       <div>
-        <Image  src={google} alt={'Kusto'}/>
-        <Image  src={github} alt={'it'}/>
+        <Button theme={ThemeButton.PRIMARY}>Log In</Button>
       </div>
-      <div>
-        <Button theme={ThemeButton.PRIMARY}>HHHHHH</Button>
-      </div>
-    </StyledModal>
+    </StyledFormAuth>
     // </StyledPageWrapper>
   );
 };
@@ -29,21 +31,23 @@ const Login = () => {
 Login.getLayout = getLayout
 export default Login;
 
-type ModalPropsType = {
+type FormAuthPropsType = {
   width: string
   height: string
 }
 
-const StyledModal = styled.div<ModalPropsType>
+const StyledFormAuth = styled.div<FormAuthPropsType>
   `
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
+    align-content: flex-start;
+    //align-items: flex-start;
     width: ${props => props.width};
     height: ${props => props.height};
     background: ${themeProject.colors.dark_500};
     border: 1px solid ${themeProject.colors.dark_300};
+    padding: 20px;
   `
 
 const Title = styled.h1
@@ -54,7 +58,17 @@ const Title = styled.h1
   font-family: Inter;
   font-weight: 700;
   line-height: 36px;
-  color:${themeProject.colors.light_100}
+  color:${themeProject.colors.light_100};
+  margin: 0;
+`
+const StyledIconBlock = styled.div
+`
+  max-width: 132px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 10px 50px 20px 50px;
 `
 
 

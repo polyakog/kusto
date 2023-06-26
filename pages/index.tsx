@@ -1,14 +1,11 @@
 import Image from 'next/image';
 import {NextPageWithLayout} from './_app';
-import styled, {ThemeProvider} from "styled-components";
-import {themeProject} from "../styles/styledComponents/Them.styled";
-import {StyledPageWrapper} from "../styles/styledComponents/StyledPageWrapper.styled";
+import styled from "styled-components";
 import {LoginNavigate} from "../hoc/LoginNavigate";
 import {getLayout} from "../components/Layout/BaseLayout/BaseLayout";
 
 const Home: NextPageWithLayout = () => (
 <LoginNavigate>
-  <StyledPageWrapper>
     <Image
       src="/kusto.png"
       alt="Next.js Logo"
@@ -16,7 +13,6 @@ const Home: NextPageWithLayout = () => (
       height={180}
       priority
     />
-  </StyledPageWrapper>
 </LoginNavigate>
 
 );

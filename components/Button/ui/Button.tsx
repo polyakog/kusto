@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from 'react';
+import {ButtonHTMLAttributes, FC} from 'react';
 import classNames from '../../../assets/lib/classNames/classNames';
 import styled from 'styled-components';
 
@@ -33,14 +33,17 @@ export const Button: FC<ButtonProps> = (props) => {
     </StyledButton>
   );
 };
-
-const StyledButton = styled.button
+type ButtonPropsType = {
+  width?: string
+  height?: string
+}
+const StyledButton = styled.button<ButtonPropsType>
   `
     cursor: pointer;
-    max-width: 182px;
+    // max-width: ${props => props.width ? props.width : '182px'};
     height: 36px;
-    width: 100%;
-    padding: 0;
+    width: ${props => props.width ? props.width : '182px'};
+    padding: 0 20px;
     border: none;
     border-radius: 2px;
 
@@ -48,16 +51,20 @@ const StyledButton = styled.button
       background: #397DF6;
       color: #FFFFFF;
     }
+
     &.primary:hover {
       background: #73A5FF;
     }
+
     &.primary:focus {
       background: #2F68CC;
     }
+
     &.primary:active {
       background: #2F68CC;
       color: #EDF3FA;
     }
+
     &.primary.disabled {
       background: #234E99;
       color: #8D9094;
@@ -67,16 +74,20 @@ const StyledButton = styled.button
       background: #333333;
       color: #FFFFFF;
     }
+
     &.secondary:hover {
       background: #4C4C4C;
     }
+
     &.secondary:focus {
       background: #333333;
       border: 1px solid #4C8DFF;
     }
+
     &.secondary:active {
       background: #212121;
     }
+
     &.secondary.disabled {
       background: #4C4C4C;
       color: #8D9094;
@@ -86,18 +97,22 @@ const StyledButton = styled.button
       color: #397DF6;
       border: 1px solid #397DF6;
     }
+
     &.outlined:hover {
       color: #73A5FF;
       border: 1px solid #73A5FF;
     }
+
     &.outlined:focus {
       color: #2F68CC;
       border: 1px solid #2F68CC;
     }
+
     &.outlined:active {
       color: #2F68CC;
       border: 1px solid #2F68CC;
     }
+
     &.outlined.disabled {
       background: #234E99;
       color: #234E99;
@@ -113,16 +128,20 @@ const StyledButton = styled.button
       background: none;
       outline: none;
     }
+
     &.clear:hover {
       color: #73A5FF;
     }
+
     &.clear:focus {
       color: #397DF6;
       border: 1px solid #397DF6;
     }
+
     &.clear:active {
       color: #2F68CC;
     }
+
     &.clear.disabled {
       color: #234E99;
     }
