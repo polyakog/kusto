@@ -2,8 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import {themeProject} from "../../styles/styledComponents/Them.styled";
 import {getLayout} from "../../components/Layout/BaseLayout/BaseLayout";
-import google from '../../public/icons/google-svgrepo-com 1.svg'
-import github from '../../public/icons/github-svgrepo-com (3) 1.svg'
+import google from '../../public/icons/google-svgrepo-com.svg'
+import github from '../../public/icons/github-svgrepo-com.svg'
 import Image from "next/image";
 import {Button, ThemeButton} from "../../components/Button/ui/Button";
 import {Input} from "../../components/Input/Input";

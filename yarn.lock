@@ -247,6 +247,11 @@
   dependencies:
     glob "7.1.7"
 
+"@next/font@^13.4.7":
+  version "13.4.7"
+  resolved "https://registry.yarnpkg.com/@next/font/-/font-13.4.7.tgz#32f9e2c4a856e23370d2be4b46eddaccce11b88d"
+  integrity sha512-l28ifb3pjKznQeXmiCD5VXkmqdpMrcUQMr4ZChAgTKrjckl/aGyRLOIlL/ABhTHmzMujdt/TTWUsdABArNK5gA==
+
 "@next/swc-darwin-arm64@13.3.0":
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.3.0.tgz#38f18e0639cd4c7edc6a38d4b83fe00f38eea4f2"
@@ -2430,6 +2435,11 @@ typed-array-length@^1.0.4:
     call-bind "^1.0.2"
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
+
+typeface-inter@^3.18.1:
+  version "3.18.1"
+  resolved "https://registry.yarnpkg.com/typeface-inter/-/typeface-inter-3.18.1.tgz#24cccdf29923f318589783997be20a662cd3ab9c"
+  integrity sha512-c+TBanYFCvmg3j5vPk+zxK4ocMZbPxMEmjnwG7rPQoV87xvQ6b07VbAOC0Va0XBbbZCGw6cWNeFuLeg1YQru3Q==
 
 typescript@5.0.4:
   version "5.0.4"

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
-import showPasswordBtn from "../../assets/svg/eye-outline.svg";
-import hidePasswordBtn from "../../assets/svg/eye-off-outline.svg";
-import googleIcon from "../../assets/svg//google-icon.svg";
-import githubIcon from "../../assets/svg/github-icon.svg";
+import showPasswordBtn from "../../public/icons/eye-outline.svg";
+import hidePasswordBtn from "../../public/icons/eye-off-outline.svg";
+import googleIcon from "../../public/icons/google-svgrepo-com.svg";
+import githubIcon from "../../public/icons/github-svgrepo-com.svg";
 import { SignupSchema } from "utils/registrationValidation";
 import {
   StyledBtn,
@@ -19,6 +19,8 @@ import {
   StyledText,
   StyledTitle,
 } from "styles/styles";
+import {getLayout} from "../../components/Layout/BaseLayout/BaseLayout";
+import Home from "../index";
 
 
 export default function Registration() {
@@ -140,3 +142,5 @@ export default function Registration() {
     </StyledContainer>
   );
 }
+
+Registration.getLayout = getLayout
