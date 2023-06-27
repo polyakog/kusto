@@ -9,7 +9,6 @@ import {
   StyledBtn,
   StyledContainer,
   StyledErrorMsg,
-  StyledField,
   StyledForm,
   StyledShowPasswordBtn,
   StyledSignIn,
@@ -22,12 +21,8 @@ import {
 import { getLayout } from "../../components/Layout/BaseLayout/BaseLayout"
 import Home from "../index"
 import { useShowPassword } from "assets/hooks/useShowPassword"
-
-interface reqI {
-  login: string
-  password: string
-  email: string
-}
+import FormikField from "components/FormikWrapper/FormikField"
+import FormLabel from "components/FormikWrapper/FormLabel"
 
 export default function Registration() {
   const { passwordType, passwordConfirmationType, showPassword, showPasswordConfirmation } =
@@ -49,8 +44,7 @@ export default function Registration() {
         }}
         validationSchema={SignupSchema}
         onSubmit={async (values, { resetForm }) => {
-          console.log(values)
-          const data: reqI = {
+          const data = {
             email: values.email,
             password: values.password,
             login: values.username
@@ -72,19 +66,19 @@ export default function Registration() {
       >
         {({ errors, touched }) => (
           <StyledForm>
-            <label>
+            <FormLabel>
               Username
-              <StyledField
+              <FormikField
                 name="username"
                 border={errors.username?.length && touched.username ? "red" : "white"}
               />
               {errors.username && touched.username ? (
                 <StyledErrorMsg>{errors.username}</StyledErrorMsg>
               ) : null}
-            </label>
-            <label id="pass">
+            </FormLabel>
+            <FormLabel id="pass">
               Password
-              <StyledField
+              <FormikField
                 name="password"
                 type={passwordType}
                 border={errors.password?.length && touched.password ? "red" : "white"}
@@ -97,15 +91,15 @@ export default function Registration() {
               {errors.password && touched.password ? (
                 <StyledErrorMsg>{errors.password}</StyledErrorMsg>
               ) : null}
-            </label>
-            <label id="pass">
+            </FormLabel>
+            <FormLabel id="pass">
               Password confirmation
               <StyledShowPasswordBtn
                 alt="show password"
                 src={passwordConfirmationType === "password" ? showPasswordBtn : hidePasswordBtn}
                 onClick={() => showPasswordConfirmation()}
               />
-              <StyledField
+              <FormikField
                 name="passwordConfirmation"
                 type={passwordConfirmationType}
                 border={
@@ -117,10 +111,10 @@ export default function Registration() {
               {errors.passwordConfirmation && touched.passwordConfirmation ? (
                 <StyledErrorMsg>{errors.passwordConfirmation}</StyledErrorMsg>
               ) : null}
-            </label>
-            <label>
+            </FormLabel>
+            <FormLabel>
               Email
-              <StyledField
+              <FormikField
                 name="email"
                 type="email"
                 border={errors.email?.length && touched.email ? "red" : "white"}
@@ -128,7 +122,7 @@ export default function Registration() {
               {errors.email && touched.email ? (
                 <StyledErrorMsg>{errors.email}</StyledErrorMsg>
               ) : null}
-            </label>
+            </FormLabel>
             <StyledBtn type="submit">Sign Up</StyledBtn>
           </StyledForm>
         )}
