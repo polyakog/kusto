@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Formik } from "formik"
 import showPasswordBtn from "../../public/icons/eye-outline.svg"
 import hidePasswordBtn from "../../public/icons/eye-off-outline.svg"
@@ -21,6 +21,7 @@ import {
 } from "styles/styles"
 import { getLayout } from "../../components/Layout/BaseLayout/BaseLayout"
 import Home from "../index"
+import { useShowPassword } from "assets/hooks/useShowPassword"
 
 interface reqI {
   login: string
@@ -29,23 +30,8 @@ interface reqI {
 }
 
 export default function Registration() {
-  const [passwordType, setPasswordType] = useState("password")
-  const [passwordConfirmationType, setPasswordConfirmationType] = useState("password")
-
-  const showPasswordHandler = () => {
-    if (passwordType === "text") {
-      setPasswordType("password")
-    } else {
-      setPasswordType("text")
-    }
-  }
-  const showPasswordConfirmationHandler = () => {
-    if (passwordConfirmationType === "text") {
-      setPasswordConfirmationType("password")
-    } else {
-      setPasswordConfirmationType("text")
-    }
-  }
+  const { passwordType, passwordConfirmationType, showPassword, showPasswordConfirmation } =
+    useShowPassword()
 
   return (
     <StyledContainer>
@@ -90,7 +76,7 @@ export default function Registration() {
               Username
               <StyledField
                 name="username"
-                // border={errors.username?.length ? "red" : "white"}
+                border={errors.username?.length && touched.username ? "red" : "white"}
               />
               {errors.username && touched.username ? (
                 <StyledErrorMsg>{errors.username}</StyledErrorMsg>
@@ -98,11 +84,15 @@ export default function Registration() {
             </label>
             <label id="pass">
               Password
-              <StyledField name="password" type={passwordType} />
+              <StyledField
+                name="password"
+                type={passwordType}
+                border={errors.password?.length && touched.password ? "red" : "white"}
+              />
               <StyledShowPasswordBtn
                 alt="show password"
                 src={passwordType === "password" ? showPasswordBtn : hidePasswordBtn}
-                onClick={() => showPasswordHandler()}
+                onClick={() => showPassword()}
               />
               {errors.password && touched.password ? (
                 <StyledErrorMsg>{errors.password}</StyledErrorMsg>
@@ -113,16 +103,28 @@ export default function Registration() {
               <StyledShowPasswordBtn
                 alt="show password"
                 src={passwordConfirmationType === "password" ? showPasswordBtn : hidePasswordBtn}
-                onClick={() => showPasswordConfirmationHandler()}
+                onClick={() => showPasswordConfirmation()}
               />
-              <StyledField name="passwordConfirmation" type={passwordConfirmationType} />
+              <StyledField
+                name="passwordConfirmation"
+                type={passwordConfirmationType}
+                border={
+                  errors.passwordConfirmation?.length && touched.passwordConfirmation
+                    ? "red"
+                    : "white"
+                }
+              />
               {errors.passwordConfirmation && touched.passwordConfirmation ? (
                 <StyledErrorMsg>{errors.passwordConfirmation}</StyledErrorMsg>
               ) : null}
             </label>
             <label>
               Email
-              <StyledField name="email" type="email" />
+              <StyledField
+                name="email"
+                type="email"
+                border={errors.email?.length && touched.email ? "red" : "white"}
+              />
               {errors.email && touched.email ? (
                 <StyledErrorMsg>{errors.email}</StyledErrorMsg>
               ) : null}
