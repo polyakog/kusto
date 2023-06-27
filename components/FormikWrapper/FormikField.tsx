@@ -8,10 +8,15 @@ type FiledProps = {
   name?: string
 }
 
-export const StyledField = styled(Field)`
+export const StyledField = styled(Field)
+  `
+    width: 100%;
+    height: 36px;
+    padding-left: 8px;
+        
   font-size: 14px;
-  width: 100%;
-  height: 36px;
+  
+  outline: none;
   border: ${(props) =>
     props.border === "red"
       ? `1px solid ${baseTheme.colors.danger[500]}`
@@ -20,7 +25,7 @@ export const StyledField = styled(Field)`
   color: ${baseTheme.colors.light[100]};
   box-shadow: inset 0 0 0 50px ${baseTheme.colors.dark[500]};
   -webkit-text-fill-color: ${baseTheme.colors.light[900]};
-  padding-left: 8px;
+ 
 `
 
 export const FormikField = (props: FiledProps) => {
